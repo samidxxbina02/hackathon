@@ -249,4 +249,3 @@ searchInp.addEventListener("input", () => {
 
 getPost();
 
-// ? pagination end
