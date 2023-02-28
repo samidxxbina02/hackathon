@@ -2,8 +2,8 @@ const API = "http://localhost:3000/post";
 
 //? pagination start
 let paginationList = document.querySelector(".pagination");
-let back = document.querySelector(".back");
-let next = document.querySelector(".next");
+let back = document.querySelector("#back");
+let next = document.querySelector("#next");
 let currentPage = 1;
 let pageTotalCount = 1;
 // ? pagination end
@@ -106,13 +106,12 @@ async function render() {
     newElem.id = element.id;
     // помещаем карточку в созданный див
     newElem.innerHTML = `
-      <div class="card m-5" style="width: 18rem;">
-     <img src=${element.photo} class="card-img-top" alt="...">
+      <div class="card_wrapper">
+      <h5 class="card-title ms-3 mt-2">${element.name}</h5>
+      <p class="card-text ms-3 " >${element.text}</p>
+      <p class="card-text text-info ms-3">${element.email}</p>
+     <img src=${element.photo} class="card-img-top img_card" alt="...">
      <div class="card-body">
-      <h5 class="card-title">${element.name}</h5>
-      <p class="card-text">${element.text}</p>
-      <p class="card-text">${element.email}</p>
-  
       <a href="#"  id=${element.id} class="btn btn-danger btn-delete">DELETE</a>
       <a href="#" id=${element.id} class="btn btn-warning btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal">EDIT</a>
      </div>
