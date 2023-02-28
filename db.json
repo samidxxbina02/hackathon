@@ -1,11 +1,39 @@
 {
   "post": [
     {
-      "name": "Альбинa",
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Great_Wave_off_Kanagawa2.jpg/258px-Great_Wave_off_Kanagawa2.jpg",
-      "text": "cvbnm,mnhbg nm,kjnh",
-      "email": "makers.frontend@gmail.com",
-      "id": 1
+      "name": "Альбин",
+      "photo": "https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg",
+      "text": "vbnm",
+      "email": "samidinova122002@gmail.com",
+      "id": 3
+    },
+    {
+      "name": "cvbnm",
+      "photo": "https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg",
+      "text": "dfghjk",
+      "email": "zz",
+      "id": 4
+    },
+    {
+      "name": "vbnm,k",
+      "photo": "https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg",
+      "text": "cvbnm",
+      "email": "cvbnm",
+      "id": 5
+    },
+    {
+      "name": "cvba",
+      "photo": "https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg",
+      "text": "cvbnm,",
+      "email": "samidinova122002@gmail.com",
+      "id": 6
+    },
+    {
+      "name": "Альбина",
+      "photo": "https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg",
+      "text": "vbn",
+      "email": "talgat2307@gmail.com",
+      "id": 7
     }
   ]
 }
