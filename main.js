@@ -52,7 +52,7 @@ btn.addEventListener("click", (event) => {
     if (Object.values(addPostForm).some((value) => !value.trim())) {
       alert("Не все поля заполнены!");
     } else {
-      createPost(addContactForm);
+      createPost(addPostForm);
       resetForm();
     }
   }
@@ -100,7 +100,6 @@ async function render() {
     postList.append(newElem);
   });
 }
-
 
 async function deletePost(id) {
   await fetch(`${API}${id}`, {
@@ -202,7 +201,7 @@ function drawPaginayionButtons(params) {
       }
     });
 }
-prev.addEventListener("click", () => {
+back.addEventListener("click", () => {
   if (currentPage <= 1) {
     return;
   }
@@ -231,4 +230,3 @@ searchInp.addEventListener("input", () => {
 });
 
 // ? pagination end
-
