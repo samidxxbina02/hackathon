@@ -1,7 +1,7 @@
 const API = "http://localhost:3000/post";
 
 //? pagination start
-let paginationList = document.querySelector(".pagination-list");
+let paginationList = document.querySelector(".pagination");
 let back = document.querySelector(".back");
 let next = document.querySelector(".next");
 let currentPage = 1;
@@ -32,7 +32,7 @@ let editPostForm = {
 };
 
 let inputs = document.querySelectorAll("input");
-let btn = document.querySelector("button");
+let btn = document.querySelector(".btnAdd");
 let postList = document.querySelector(".post_list");
 
 inputs.forEach((input) => {
@@ -48,6 +48,7 @@ btn.addEventListener("click", (event) => {
     editPost(editPostForm, editPostForm.id);
     resetForm();
     btn.innerText = "Add";
+    editStatus = false;
   } else {
     if (Object.values(addPostForm).some((value) => !value.trim())) {
       alert("Не все поля заполнены!");
@@ -58,17 +59,40 @@ btn.addEventListener("click", (event) => {
   }
 });
 
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("btn-delete")) {
+    const id = event.target.getAttribute("id");
+    if (confirm("Do you really wanna delete this contact?")) deletePost(id);
+  }
+
+  if (event.target.classList.contains("btn-edit")) {
+    const id = event.target.getAttribute("id");
+    editStatus = true;
+    window.scrollTo(0, 0);
+    btn.innerText = "Edit";
+    let editedPost = post.find((post) => post.id == id);
+    editPostForm = {
+      ...editedPost,
+    };
+    inputs.forEach((input) => {
+      const field = input.getAttribute("name");
+      input.value = editPostForm[field];
+    });
+  }
+});
+
 async function getPost() {
   let postResponse = await fetch(API).then((res) => res.json());
   post = postResponse;
+  console.log(postResponse);
   render();
 }
 
 async function render() {
-  let res = await fetch(`${API}?q=${searchVal}&_page=${currentPage}&_limit=3`);
+  let res = await fetch(`${API}?q=${searchVal}&_page=${currentPage}&_limit=5`);
   let post = await res.json();
 
-  drawPaginayionButtons();
+  drawPaginationButtons();
   // очищаем лист
   postList.innerHTML = "";
   // перебираем массив products
@@ -91,8 +115,6 @@ async function render() {
   
       <a href="#"  id=${element.id} class="btn btn-danger btn-delete">DELETE</a>
       <a href="#" id=${element.id} class="btn btn-warning btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal">EDIT</a>
-  
-  
      </div>
      </div>
       `;
@@ -102,7 +124,7 @@ async function render() {
 }
 
 async function deletePost(id) {
-  await fetch(`${API}${id}`, {
+  await fetch(`${API}/${id}`, {
     method: "DELETE",
   });
   post = post.filter((post) => post.id != id);
@@ -110,7 +132,7 @@ async function deletePost(id) {
 }
 
 async function editPost(editedPost, id) {
-  const editedPostResponse = await fetch(`${API}${id}`, {
+  const editedPostResponse = await fetch(`${API}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -121,13 +143,13 @@ async function editPost(editedPost, id) {
   render();
 }
 
-async function createPost(post) {
+async function createPost(postInfo) {
   const createdPostResponse = await fetch(API, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(contact),
+    body: JSON.stringify(postInfo),
   }).then((res) => res.json());
   post.push(createdPostResponse);
   render();
@@ -164,37 +186,33 @@ function handleChange(field, value) {
 
 // ? pagination start
 
-function drawPaginayionButtons(params) {
+function drawPaginationButtons() {
   fetch(`${API}?q=${searchVal}`)
     .then((res) => res.json())
     .then((data) => {
-      pageTotalcount = Math.ceil(data.length / 3);
+      pageTotalCount = Math.ceil(data.length / 5);
       paginationList.innerHTML = "";
-      for (let i = 1; i <= pageTotalcount; i++) {
+      for (let i = 1; i <= pageTotalCount; i++) {
         if (currentPage == i) {
           let page1 = document.createElement("li");
           page1.innerHTML = `
-          <li class="page-item active"><a class="page-link page_number" href="#">${i}</a></li>
-            
-            `;
+          <li class="page-item active"><a class="page-link page_number" href="#">${i}</a></li>`;
           paginationList.append(page1);
         } else {
           let page1 = document.createElement("li");
           page1.innerHTML = `
-          <li class="page-item"><a class="page-link page_number" href="#">${i}</a></li>
-            
-            `;
+          <li class="page-item"><a class="page-link page_number" href="#">${i}</a></li>`;
           paginationList.append(page1);
         }
       }
       // ? красим в серый цвет prev/next кнопки
       if (currentPage == 1) {
-        prev.classList.add("disabled");
+        back.classList.add("disabled");
       } else {
-        prev.classList.remove("disabled");
+        back.classList.remove("disabled");
       }
 
-      if (currentPage == pageTotalcount) {
+      if (currentPage == pageTotalCount) {
         next.classList.add("disabled");
       } else {
         next.classList.remove("disabled");
@@ -210,7 +228,7 @@ back.addEventListener("click", () => {
 });
 
 next.addEventListener("click", () => {
-  if (currentPage >= pageTotalcount) {
+  if (currentPage >= pageTotalCount) {
     return;
   }
   currentPage++;
@@ -229,4 +247,5 @@ searchInp.addEventListener("input", () => {
   render();
 });
 
-// ? pagination end
+getPost();
+
