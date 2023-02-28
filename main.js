@@ -20,17 +20,44 @@ let editPostForm = {
 
 let inputs = document.querySelectorAll("input");
 let btn = document.querySelector("button");
-let todoList = document.querySelector(".post_list");
+let postList = document.querySelector(".post_list");
 
-// ?функция для  отображения карточек продукта
+inputs.forEach((input) => {
+  let field = input.getAttribute("name");
+  input.addEventListener("input", (event) => {
+    handleChange(field, event.target.value);
+  });
+});
+
+btn.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (editStatus) {
+    editPost(editPostForm, editPostForm.id);
+    resetForm();
+    btn.innerText = "Add";
+  } else {
+    if (Object.values(addPostForm).some((value) => !value.trim())) {
+      alert("Не все поля заполнены!");
+    } else {
+      createPost(addContactForm);
+      resetForm();
+    }
+  }
+});
+
+async function getPost() {
+  let postResponse = await fetch(API).then((res) => res.json());
+  post = postResponse;
+  render();
+}
+
 async function render() {
-  // получаем список продуктов с сервера
   let res = await fetch(`${API}?q=${searchVal}&_page=${currentPage}&_limit=3`);
   let post = await res.json();
 
   drawPaginayionButtons();
   // очищаем лист
-  list.innerHTML = "";
+  postList.innerHTML = "";
   // перебираем массив products
 
   post.forEach((element) => {
@@ -57,6 +84,67 @@ async function render() {
      </div>
       `;
     // добавляем созданный див с карточкой внутри list
-    list.append(newElem);
+    postList.append(newElem);
   });
+}
+
+async function deletePost(id) {
+  await fetch(`${API}${id}`, {
+    method: "DELETE",
+  });
+  post = post.filter((post) => post.id != id);
+  render();
+}
+
+async function editPost(editedPost, id) {
+  const editedPostResponse = await fetch(`${API}${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedPost),
+  }).then((res) => res.json());
+  post = post.map((post) => (post.id == id ? editedPostResponse : post));
+  render();
+}
+
+async function createPost(post) {
+  const createdPostResponse = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(contact),
+  }).then((res) => res.json());
+  post.push(createdPostResponse);
+  render();
+}
+
+function resetForm() {
+  inputs.forEach((input) => {
+    input.value = "";
+  });
+  if (editStatus) {
+    editPostForm = {
+      ...initialState,
+    };
+  } else {
+    addPostForm = {
+      ...initialState,
+    };
+  }
+}
+
+function handleChange(field, value) {
+  if (editStatus) {
+    editPostForm = {
+      ...editPostForm,
+      [field]: value,
+    };
+  } else {
+    addPostForm = {
+      ...addPostForm,
+      [field]: value,
+    };
+  }
 }
