@@ -248,3 +248,7 @@ searchInp.addEventListener("input", () => {
 });
 
 getPost();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 15784f287abff0323cb2c9ec98e7084017ffa03b
