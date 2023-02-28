@@ -1,23 +1,189 @@
+.card_wrapper {
+  /* z-index: 5; */
+  border: 5px #00ffcb solid;
+  width: 900px;
+  background-color: #eee;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 4%;
 }
 body {
-  height: auto;
+  background-color: #000;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png");
+  /* width: 100vw; */
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+  z-index: 6;
 }
 
 input {
   width: 400px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+input:hover {
+  border: 4px #00ffcb solid;
+  box-shadow: 12px 12px 24px rgba(247, 249, 249, 0.64);
 }
 
 .btnAdd {
+  width: 110px;
+  min-height: 60px;
+  font-family: "Nunito", sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #313133;
+  background: #edf4f4;
+  background: linear-gradient(
+    90deg,
+    rgb(143, 151, 150) 0%,
+    rgb(198, 214, 239) 100%
+  );
+  border: none;
+  border-radius: 1000px;
+  box-shadow: 12px 12px 24px rgba(247, 249, 249, 0.64);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.btnAdd::before {
+  content: "";
+  border-radius: 1000px;
+  min-width: calc(300px + 12px);
+  min-height: calc(60px + 12px);
+  border: 6px solid #00ffcb;
+  box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.btnAdd:hover,
+.btnAdd:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+.btnAdd:hover::before,
+.btnAdd:focus::before {
+  opacity: 1;
+}
+
+.btnAdd::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 6px solid #f0f5f4;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
+}
+
+.btnAdd:hover::after,
+.btnAdd:focus::after {
+  animation: none;
+  display: none;
+}
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+.navbar-brand {
   width: 50px;
   height: 50px;
+}
+
+.searchings {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 5px;
+  margin: 20px;
+}
+
+#search {
+  height: 40px;
+  width: 150px;
+}
+
+.btn {
+  background-color: azure;
+  height: 40px;
+  width: 50px;
+}
+
+h1 {
+  background: -webkit-linear-gradient(#eee, #00ffcb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 7;
+}
+
+.input_search {
+  width: 120px;
+}
+.btn_img {
+  width: 25px;
+  height: 23px;
+}
+
+.btn-delete,
+.btn-edit {
+  width: 80px;
+  height: 35px;
+  background-color: #333;
+  color: #eee;
+  font-style: oblique;
+  margin: 20px;
+}
+
+.card-text {
+  font-size: 25px;
+  font-style: oblique;
+}
+
+.card-title {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.img_card {
+  width: 890px;
 }

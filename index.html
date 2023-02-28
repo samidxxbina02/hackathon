@@ -11,72 +11,25 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./adaptive.css" />
     <title>Document</title>
   </head>
   <body>
-    <!-- navbar start  -->
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <img class="navbar-brand" src="./img/twittter.svg" />
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              id="search"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              id="search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
-    <!-- navbar end -->
+    <form class="d-flex searchings" role="search">
+      <input
+        class="form-control me-1 input_search"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        id="search"
+      />
+      <button class="btn btn-outline-success" type="submit">
+        <img
+          class="btn_img"
+          src="https://cdn-icons-png.flaticon.com/512/751/751463.png"
+        />
+      </button>
+    </form>
 
     <div class="container">
       <h1>YOUR POST</h1>
@@ -84,19 +37,24 @@
         <input placeholder="Your nickname" name="name" type="text" />
         <input placeholder="Your photo" name="photo" type="text" />
         <input placeholder="Your description" name="text" type="text" />
-        <input placeholder="Your email" name="email" type="text" />
+        <input placeholder="Your hashtag" name="email" type="text" />
         <button class="btnAdd" type="submit">Add</button>
       </form>
       <ul class="post_list"></ul>
     </div>
     <!-- pagination start -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item back"><a class="page-link" href="#">Back</a></li>
+    <nav aria-label="Page navigation example d-flex justify-content-center">
+      <ul class="pagination d-flex justify-content-center me-2">
+        <li class="page-item">
+          <a class="page-link" id="back" href="#">Back</a>
+        </li>
         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-        <li class="page-item next"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item">
+          <a class="page-link" id="next" href="#">Next</a>
+        </li>
       </ul>
     </nav>
+
     <!-- pagination end -->
 
     <script src="./main.js"></script>
